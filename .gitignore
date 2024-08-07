@@ -1,0 +1,28 @@
+# Flutter/Dart/Pub related
+**/doc/api/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache
+.pub
+build/
+# Symbolicated files
+*.symbols
+# Obfuscation
+*.map.json
+# Project specific
+.idea/
+.android/
+.dart_tool/
+.gradle/
+.idea/
+.packages
+.pub/
+build/
+flutter_*.json
+generated_plugin_registrant.dart
+ios/
+macos/
+web/
+windows/
+linux/
