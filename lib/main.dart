@@ -10,7 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'News App',
+      debugShowCheckedModeBanner: false,
+      title: 'Quick App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: TextTheme(
@@ -41,7 +42,7 @@ class _NewsListViewState extends State<NewsListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('News App'),
+        title: Text('Quick News'),
       ),
       body: FutureBuilder<List<dynamic>>(
         future: news,
