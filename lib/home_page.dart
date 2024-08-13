@@ -7,7 +7,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage> {
   List<dynamic> _news = [];
 
   @override
@@ -16,7 +16,10 @@ class _HomePageState extends State<HomePage> {
     _fetchNews();
   }
 
-  void _fetchNews() async {
+  @override
+  bool get wantKeepAlive => true;
+
+  Future<void> _fetchNews() async {
     var news = await fetchNews();
     setState(() {
       _news = news;
@@ -25,18 +28,22 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // Required when using AutomaticKeepAliveClientMixin
     return Scaffold(
       appBar: AppBar(
         title: Text('News App'),
       ),
       body: _news.isEmpty
           ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: _news.length,
-              itemBuilder: (context, index) {
-                final article = _news[index];
-                return NewsCard(article: article);
-              },
+          : RefreshIndicator(
+              onRefresh: _fetchNews,
+              child: ListView.builder(
+                itemCount: _news.length,
+                itemBuilder: (context, index) {
+                  final article = _news[index];
+                  return NewsCard(article: article);
+                },
+              ),
             ),
     );
   }
