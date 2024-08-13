@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
     super.build(context); // Required when using AutomaticKeepAliveClientMixin
     return Scaffold(
       appBar: AppBar(
-        title: Text('News App'),
+        title: const Text('Pigi'),
       ),
       body: _news.isEmpty
           ? Center(child: CircularProgressIndicator())
