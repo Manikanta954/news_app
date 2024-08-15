@@ -13,25 +13,34 @@ class _NewsListViewState extends State<NewsListView> {
   @override
   void initState() {
     super.initState();
-    news = fetchNews(); // Fetch news on initialization
+    // Fetch news only once during the initialization of the widget
+    news = fetchNews();
+  }
+
+  // Method to refresh the news list
+  Future<void> _refreshNews() async {
+    setState(() {
+      news = fetchNews(); // Refetch news when pulled down
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 0),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Pigi',
-            style: TextStyle(
-                fontSize: 45,
-                fontWeight: FontWeight.w600,
-                fontStyle: FontStyle.italic),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Pigi',
+          style: TextStyle(
+            fontSize: 45,
+            fontWeight: FontWeight.w600,
+            fontStyle: FontStyle.italic,
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.only(top: 10),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: RefreshIndicator(
+          onRefresh: _refreshNews, // Pull-to-refresh callback
           child: FutureBuilder<List<dynamic>>(
             future: news,
             builder: (context, snapshot) {

@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const String apiKey = '2c7bb3170e1246cd870f66a00a074ac6'; // Replace with your valid API key
-const String url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=$apiKey';
+// Use your provided Currents API key
+const String apiKey = 'oqv0U4Ofoi-YGGUnZ_m0KfTVLk7FG4TPXyyUGOSU0TqAfc_T';
+const String url = 'https://api.currentsapi.services/v1/latest-news?apiKey=$apiKey';
 
 Future<List<dynamic>> fetchNews() async {
   try {
@@ -10,7 +11,7 @@ Future<List<dynamic>> fetchNews() async {
     
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      return data['articles'];
+      return data['news']; // Adjusted to match the response structure of Currents API
     } else {
       throw Exception('Failed to load news');
     }
