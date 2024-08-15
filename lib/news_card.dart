@@ -23,7 +23,7 @@ class _NewsCardState extends State<NewsCard> {
 
   @override
   Widget build(BuildContext context) {
-    String? imageUrl = widget.article['image']; // Currents API uses 'image' for image URLs
+    String? imageUrl = widget.article['image'];
     bool hasValidUrl = imageUrl != null && imageUrl.isNotEmpty;
 
     return Card(
@@ -31,7 +31,6 @@ class _NewsCardState extends State<NewsCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // If the image URL is valid, show the image; otherwise, show a placeholder
           if (hasValidUrl)
             CachedNetworkImage(
               imageUrl: imageUrl!,
@@ -53,14 +52,22 @@ class _NewsCardState extends State<NewsCard> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              widget.article['title'] ?? 'No Title', // Currents API uses 'title'
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              widget.article['title'] ?? 'No Title',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Playwrite_CU',
+              ),
             ),
           ),
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(widget.article['description'] ?? 'No Description',style: TextStyle(fontSize:15),), // Currents API uses 'description'
+            child: Text(
+              widget.article['description'] ?? 'No Description',
+              style: TextStyle(fontSize: 20,color: Color.fromARGB(255, 91, 90, 90)
+              ),
+            ),
           ),
 
           Padding(
